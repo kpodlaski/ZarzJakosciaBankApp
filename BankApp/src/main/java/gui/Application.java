@@ -69,14 +69,19 @@ public class Application {
 
         } catch (UserUnnkownOrBadPasswordException e1) {
             e1.printStackTrace();
+            //Show Dialog for user
         } catch (SQLException e1) {
             e1.printStackTrace();
+            //Show Dialog for user
         }
-        additionalWindow.setVisible(false);
-        additionalWindow.dispose();
-        additionalWindow = null;
-        userInfo.setText(accountManager.getLoggedUser().getName());
-        signInButton.setText("Logout");
+        if(success){
+            additionalWindow.setVisible(false);
+            additionalWindow.dispose();
+            additionalWindow = null;
+            userInfo.setText(accountManager.getLoggedUser().getName());
+            signInButton.setText("Logout");
+        }
+
     }
 
 
