@@ -1,6 +1,6 @@
 package biz;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
 import db.dao.DAO;
 import model.Operation;
 import model.Password;
@@ -9,6 +9,7 @@ import model.exceptions.UserUnnkownOrBadPasswordException;
 import model.operations.OperationType;
 import model.operations.Withdraw;
 
+import org.apache.commons.codec.binary.Base64;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -63,7 +64,9 @@ public class AuthenticationManager {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             bpass = Charset.forName("UTF-8").encode(cBuffer).array();
             byte[] encodedhash = digest.digest(bpass);
-            result = Base64.encode(encodedhash);
+            Base64 base64 = new Base64();
+            result = new String(base64.encode(encodedhash));
+            //result = Base64.encode(encodedhash);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
